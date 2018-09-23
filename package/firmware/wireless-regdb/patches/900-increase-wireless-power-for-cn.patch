@@ -1,0 +1,26 @@
+From 2d8ee0a526ab89afc279c30b9d9bdc57e8d30f3b Mon Sep 17 00:00:00 2001
+From: pexcn <i@pexcn.me>
+Date: Fri, 22 Dec 2017 12:08:14 +0800
+Subject: [PATCH] Increase wireless power for CN
+
+---
+ db.txt | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+--- a/db.txt
++++ b/db.txt
+@@ -277,10 +277,10 @@ country CL: DFS-JP
+ 	(5735 - 5835 @ 80), (20)
+ 
+ country CN: DFS-FCC
+-	(2402 - 2482 @ 40), (20)
+-	(5170 - 5250 @ 80), (23), AUTO-BW
+-	(5250 - 5330 @ 80), (23), DFS, AUTO-BW
+-	(5735 - 5835 @ 80), (30)
++	(2402 - 2482 @ 40), (30)
++	(5170 - 5250 @ 80), (30), AUTO-BW
++	(5250 - 5330 @ 80), (30), DFS, AUTO-BW
++	(5735 - 5835 @ 80), (35)
+ 	# 60 GHz band channels 1,4: 28dBm, channels 2,3: 44dBm
+ 	# ref: http://www.miit.gov.cn/n11293472/n11505629/n11506593/n11960250/n11960606/n11960700/n12330791.files/n12330790.pdf
+ 	(57240 - 59400 @ 2160), (28)

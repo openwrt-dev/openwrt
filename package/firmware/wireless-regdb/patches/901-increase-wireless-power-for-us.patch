@@ -1,0 +1,26 @@
+From b9729701d06951a87c2560f4cae408c0c247b510 Mon Sep 17 00:00:00 2001
+From: pexcn <i@pexcn.me>
+Date: Fri, 22 Dec 2017 12:32:22 +0800
+Subject: [PATCH] Increase wireless power for US
+
+---
+ db.txt | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+--- a/db.txt
++++ b/db.txt
+@@ -1238,10 +1238,10 @@ country UG: DFS-FCC
+ country US: DFS-FCC
+ 	(2402 - 2472 @ 40), (30)
+ 	# 5.15 ~ 5.25 GHz: 30 dBm for master mode, 23 dBm for clients
+-	(5170 - 5250 @ 80), (23), AUTO-BW
+-	(5250 - 5330 @ 80), (23), DFS, AUTO-BW
+-	(5490 - 5730 @ 160), (23), DFS
+-	(5735 - 5835 @ 80), (30)
++	(5170 - 5250 @ 80), (30), AUTO-BW
++	(5250 - 5330 @ 80), (30), DFS, AUTO-BW
++	(5490 - 5730 @ 160), (30), DFS
++	(5735 - 5835 @ 80), (35)
+ 	# 60g band
+ 	# reference: http://cfr.regstoday.com/47cfr15.aspx#47_CFR_15p255
+ 	# channels 1,2,3, EIRP=40dBm(43dBm peak)
