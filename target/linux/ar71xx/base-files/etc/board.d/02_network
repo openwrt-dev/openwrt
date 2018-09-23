@@ -160,7 +160,6 @@ ar71xx_setup_interfaces()
 	gl-ar150|\
 	gl-ar300m|\
 	gl-domino|\
-	gl-inet|\
 	gl-mifi|\
 	jwap003|\
 	om2p-hsv4|\
