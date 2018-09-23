@@ -72,7 +72,7 @@ $(call Package/openssl/Default)
   SECTION:=libs
   SUBMENU:=SSL
   CATEGORY:=Libraries
-  DEPENDS:=+OPENSSL_WITH_COMPRESSION:zlib
+  DEPENDS:=+OPENSSL_WITH_COMPRESSION:zlib +libpthread
   TITLE+= (libraries)
   ABI_VERSION:=$(PKG_VERSION)
   MENU:=1
@@ -104,6 +104,9 @@ endef
 OPENSSL_NO_CIPHERS:= no-idea no-md2 no-mdc2 no-rc5 no-sha0 no-camellia no-krb5 \
  no-whrlpool no-whirlpool no-seed no-jpake
 OPENSSL_OPTIONS:= shared no-err no-sse2 no-ssl2 no-ssl2-method no-heartbeats
+
+# Enable threading
+OPENSSL_OPTIONS += threads
 
 ifdef CONFIG_OPENSSL_ENGINE_CRYPTO
   OPENSSL_OPTIONS += -DHAVE_CRYPTODEV
