@@ -1,0 +1,14 @@
+#!/bin/sh
+
+uci batch <<-EOF
+	set luci.main.lang='zh_cn'
+	commit luci
+	set system.@system[0].zonename='Asia/Taipei'
+	set system.@system[0].timezone='CST-8'
+	commit system
+	set dhcp.@dnsmasq[0].cachesize=2048
+	set dhcp.@dnsmasq[0].dnsforwardmax=300
+	set dhcp.@dnsmasq[0].rebind_protection=0
+	set dhcp.@dnsmasq[0].quietdhcp=1
+	commit dhcp
+EOF
