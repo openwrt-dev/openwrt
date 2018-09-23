@@ -1,0 +1,17 @@
+--- a/db.txt
++++ b/db.txt
+@@ -1284,10 +1284,10 @@ country UG: DFS-FCC
+ country US: DFS-FCC
+ 	(2402 - 2472 @ 40), (30)
+ 	# 5.15 ~ 5.25 GHz: 30 dBm for master mode, 23 dBm for clients
+-	(5170 - 5250 @ 80), (23), AUTO-BW
+-	(5250 - 5330 @ 80), (23), DFS, AUTO-BW
+-	(5490 - 5730 @ 160), (23), DFS
+-	(5735 - 5835 @ 80), (30)
++	(5170 - 5250 @ 80), (30), AUTO-BW
++	(5250 - 5330 @ 80), (30), DFS, AUTO-BW
++	(5490 - 5730 @ 160), (30), DFS
++	(5735 - 5835 @ 80), (35)
+ 	# 60g band
+ 	# reference: section IV-D https://docs.fcc.gov/public/attachments/FCC-16-89A1.pdf
+ 	# channels 1-6 EIRP=40dBm(43dBm peak)
