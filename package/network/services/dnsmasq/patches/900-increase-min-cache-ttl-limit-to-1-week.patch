@@ -1,0 +1,20 @@
+From 931d3414c18e1011c1863c729ed05451b49471d8 Mon Sep 17 00:00:00 2001
+From: "pexcn" <i@pexcn.me>
+Date: Fri, 22 Dec 2017 15:28:19 +0800
+Subject: [PATCH] increase --min-cache-ttl limit to 1 week
+
+---
+ src/config.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/src/config.h
++++ b/src/config.h
+@@ -32,7 +32,7 @@
+ #define RANDOM_SOCKS 64 /* max simultaneous random ports */
+ #define LEASE_RETRY 60 /* on error, retry writing leasefile after LEASE_RETRY seconds */
+ #define CACHESIZ 150 /* default cache size */
+-#define TTL_FLOOR_LIMIT 3600 /* don't allow --min-cache-ttl to raise TTL above this under any circumstances */
++#define TTL_FLOOR_LIMIT 604800 /* don't allow --min-cache-ttl to raise TTL above this under any circumstances */
+ #define MAXLEASES 1000 /* maximum number of DHCP leases */
+ #define PING_WAIT 3 /* wait for ping address-in-use test */
+ #define PING_CACHE_TIME 30 /* Ping test assumed to be valid this long. */
