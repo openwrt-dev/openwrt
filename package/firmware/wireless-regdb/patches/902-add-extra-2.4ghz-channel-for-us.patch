@@ -1,0 +1,20 @@
+From 300c98c5c513343e74cafb1775efbc0499ce736c Mon Sep 17 00:00:00 2001
+From: pexcn <i@pexcn.me>
+Date: Fri, 22 Dec 2017 12:33:10 +0800
+Subject: [PATCH] Add extra 2.4GHz channel for US
+
+---
+ db.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/db.txt
++++ b/db.txt
+@@ -1236,7 +1236,7 @@ country UG: DFS-FCC
+ 	(5735 - 5835 @ 80), (30)
+ 
+ country US: DFS-FCC
+-	(2402 - 2472 @ 40), (30)
++	(2402 - 2482 @ 40), (30)
+ 	# 5.15 ~ 5.25 GHz: 30 dBm for master mode, 23 dBm for clients
+ 	(5170 - 5250 @ 80), (30), AUTO-BW
+ 	(5250 - 5330 @ 80), (30), DFS, AUTO-BW
