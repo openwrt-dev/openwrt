@@ -94,7 +94,8 @@ $(call Package/openssl/Default)
   DEPENDS:=+OPENSSL_WITH_COMPRESSION:zlib \
 	   +OPENSSL_ENGINE_BUILTIN_AFALG:kmod-crypto-user \
 	   +OPENSSL_ENGINE_BUILTIN_DEVCRYPTO:kmod-cryptodev \
-	   +OPENSSL_ENGINE_BUILTIN_PADLOCK:kmod-crypto-hw-padlock
+	   +OPENSSL_ENGINE_BUILTIN_PADLOCK:kmod-crypto-hw-padlock \
+	   +libpthread
   TITLE+= (libraries)
   ABI_VERSION:=1.1
   MENU:=1
@@ -185,6 +186,9 @@ The engine_id is "padlock"
 endef
 
 OPENSSL_OPTIONS:= shared
+
+# Enable threading
+OPENSSL_OPTIONS += threads
 
 ifndef CONFIG_OPENSSL_WITH_BLAKE2
   OPENSSL_OPTIONS += no-blake2
