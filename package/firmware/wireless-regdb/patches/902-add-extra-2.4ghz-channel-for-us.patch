@@ -1,0 +1,11 @@
+--- a/db.txt
++++ b/db.txt
+@@ -1282,7 +1282,7 @@ country UG: DFS-FCC
+ 	(5735 - 5835 @ 80), (30)
+ 
+ country US: DFS-FCC
+-	(2402 - 2472 @ 40), (30)
++	(2402 - 2482 @ 40), (30)
+ 	# 5.15 ~ 5.25 GHz: 30 dBm for master mode, 23 dBm for clients
+ 	(5170 - 5250 @ 80), (30), AUTO-BW
+ 	(5250 - 5330 @ 80), (30), DFS, AUTO-BW
