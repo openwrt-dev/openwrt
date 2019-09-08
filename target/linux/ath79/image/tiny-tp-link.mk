@@ -400,7 +400,7 @@ endef
 TARGET_DEVICES += tplink_tl-wr941nd-v6
 
 define Device/tplink_tl-wr941n-v7-cn
-  $(Device/tplink-4mlzma)
+  $(Device/tplink-16mlzma)
   ATH_SOC := qca9558
   DEVICE_TITLE := TP-Link TL-WR941N v7 (CN)
   TPLINK_HWID := 0x09410007
