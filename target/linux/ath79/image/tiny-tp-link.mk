@@ -102,7 +102,7 @@ endef
 TARGET_DEVICES += tplink_tl-wr741-v1
 
 define Device/tplink_tl-wr741nd-v4
-  $(Device/tplink-4mlzma)
+  $(Device/tplink-8mlzma)
   ATH_SOC := ar9331
   DEVICE_TITLE := TP-Link TL-WR741N/ND v4
   TPLINK_HWID := 0x07410004
