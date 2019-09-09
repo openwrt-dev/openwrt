@@ -117,7 +117,6 @@
 			uboot: partition@0 {
 				label = "u-boot";
 				reg = <0x000000 0x020000>;
-				read-only;
 			};
 
 			partition@20000 {
@@ -129,7 +128,6 @@
 			art: partition@ff0000 {
 				label = "art";
 				reg = <0xff0000 0x010000>;
-				read-only;
 			};
 		};
 	};
