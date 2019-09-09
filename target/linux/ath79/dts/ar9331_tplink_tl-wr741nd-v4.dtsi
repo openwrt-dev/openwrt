@@ -59,7 +59,7 @@
 
 		lan4 {
 			label = "tp-link:green:lan4";
-			gpios = <&gpio 17 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio 13 GPIO_ACTIVE_HIGH>;
 		};
 
 		qss {
@@ -74,7 +74,7 @@
 
 		wan {
 			label = "tp-link:green:wan";
-			gpios = <&gpio 13 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpio 17 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
@@ -126,9 +126,6 @@
 
 	gmac-config {
 		device = <&gmac>;
-
-		switch-phy-addr-swap = <1>;
-		switch-phy-swap = <1>;
 	};
 };
 
