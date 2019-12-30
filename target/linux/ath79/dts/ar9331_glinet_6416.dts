@@ -8,6 +8,13 @@
 	compatible = "glinet,6416", "qca,ar9331";
 };
 
+// My 6416 is only one ethernet port, references:
+// https://github.com/openwrt/openwrt/pull/2601
+// https://github.com/openwrt/openwrt/commit/eba0db95b510112eea668fa18227af94169af4f0
+&eth1 {
+	compatible = "syscon", "simple-mfd";
+};
+
 &spi {
 	status = "okay";
 
