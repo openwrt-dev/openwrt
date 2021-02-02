@@ -1,11 +1,20 @@
+From 105e418e087f0c2b51475b0d54234bf91ca0904d Mon Sep 17 00:00:00 2001
+From: pexcn <i@pexcn.me>
+Date: Wed, 3 Feb 2021 01:58:47 +0800
+Subject: [PATCH] update 2
+
+---
+ db.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
 --- a/db.txt
 +++ b/db.txt
-@@ -1282,7 +1282,7 @@ country UG: DFS-FCC
- 	(5735 - 5835 @ 80), (30)
- 
+@@ -1578,7 +1578,7 @@ country UG: DFS-FCC
+ # frequency band, 2,483.5–2,500 MHz which is subject to strict emission limits
+ # set out in 47 CFR § 15.205. TODO: reenable and specify a safe TX power here.
  country US: DFS-FCC
--	(2402 - 2472 @ 40), (30)
-+	(2402 - 2482 @ 40), (30)
+-	(2400 - 2472 @ 40), (30)
++	(2400 - 2482 @ 40), (30)
  	# 5.15 ~ 5.25 GHz: 30 dBm for master mode, 23 dBm for clients
- 	(5170 - 5250 @ 80), (30), AUTO-BW
- 	(5250 - 5330 @ 80), (30), DFS, AUTO-BW
+ 	(5150 - 5250 @ 80), (30), AUTO-BW
+ 	(5250 - 5350 @ 80), (30), DFS, AUTO-BW
