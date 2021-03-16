@@ -1,0 +1,162 @@
+--- a/include/net/netfilter/nf_conntrack_ecache.h
++++ b/include/net/netfilter/nf_conntrack_ecache.h
+@@ -71,7 +71,7 @@ struct nf_ct_event {
+ 	int report;
+ };
+ 
+-#ifdef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#ifdef CONFIG_NF_CONNTRACK_EVENTS
+ extern int nf_conntrack_register_notifier(struct net *net, struct notifier_block *nb);
+ extern int nf_conntrack_unregister_notifier(struct net *net, struct notifier_block *nb);
+ #else
+@@ -92,7 +92,7 @@ static inline void
+ nf_conntrack_event_cache(enum ip_conntrack_events event, struct nf_conn *ct)
+ {
+ 	struct nf_conntrack_ecache *e;
+-#ifndef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#ifndef CONFIG_NF_CONNTRACK_EVENTS
+ 	struct net *net = nf_ct_net(ct);
+ 
+ 	if (!rcu_access_pointer(net->ct.nf_conntrack_event_cb))
+@@ -111,7 +111,7 @@ static inline int
+ nf_conntrack_event_report(enum ip_conntrack_events event, struct nf_conn *ct,
+ 			  u32 portid, int report)
+ {
+-#ifndef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#ifndef CONFIG_NF_CONNTRACK_EVENTS
+ 	const struct net *net = nf_ct_net(ct);
+ 
+ 	if (!rcu_access_pointer(net->ct.nf_conntrack_event_cb))
+@@ -124,7 +124,7 @@ nf_conntrack_event_report(enum ip_conntr
+ static inline int
+ nf_conntrack_event(enum ip_conntrack_events event, struct nf_conn *ct)
+ {
+-#ifndef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#ifndef CONFIG_NF_CONNTRACK_EVENTS
+ 	const struct net *net = nf_ct_net(ct);
+ 
+ 	if (!rcu_access_pointer(net->ct.nf_conntrack_event_cb))
+--- a/include/net/netns/conntrack.h
++++ b/include/net/netns/conntrack.h
+@@ -114,7 +114,7 @@ struct netns_ct {
+ 
+ 	struct ct_pcpu __percpu *pcpu_lists;
+ 	struct ip_conntrack_stat __percpu *stat;
+-#ifdef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#ifdef CONFIG_NF_CONNTRACK_EVENTS
+ 	struct atomic_notifier_head nf_conntrack_chain;
+ #else
+ 	struct nf_ct_event_notifier __rcu *nf_conntrack_event_cb;
+--- a/net/netfilter/Kconfig
++++ b/net/netfilter/Kconfig
+@@ -136,14 +136,6 @@ config NF_CONNTRACK_RTCACHE
+ 	  To compile it as a module, choose M here.  If unsure, say N.
+ 	  The module will be called nf_conntrack_rtcache.
+ 
+-config NF_CONNTRACK_CHAIN_EVENTS
+-	bool "Register multiple callbacks to ct events"
+-	depends on NF_CONNTRACK_EVENTS
+-	help
+-	  Support multiple registrations.
+-
+-	  If unsure, say `N'.
+-
+ config NF_CONNTRACK_TIMEOUT
+ 	bool  'Connection tracking timeout'
+ 	depends on NETFILTER_ADVANCED
+--- a/net/netfilter/nf_conntrack_core.c
++++ b/net/netfilter/nf_conntrack_core.c
+@@ -2250,7 +2250,7 @@ int nf_conntrack_init_net(struct net *ne
+ 	if (ret < 0)
+ 		goto err_proto;
+ 
+-#ifdef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#ifdef CONFIG_NF_CONNTRACK_EVENTS
+ 	ATOMIC_INIT_NOTIFIER_HEAD(&net->ct.nf_conntrack_chain);
+ #endif
+ 	return 0;
+--- a/net/netfilter/nf_conntrack_ecache.c
++++ b/net/netfilter/nf_conntrack_ecache.c
+@@ -18,7 +18,7 @@
+ #include <linux/stddef.h>
+ #include <linux/err.h>
+ #include <linux/percpu.h>
+-#ifdef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#ifdef CONFIG_NF_CONNTRACK_EVENTS
+ #include <linux/notifier.h>
+ #endif
+ #include <linux/kernel.h>
+@@ -120,7 +120,7 @@ static void ecache_work(struct work_stru
+ 		schedule_delayed_work(&ctnet->ecache_dwork, delay);
+ }
+ 
+-#ifdef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#ifdef CONFIG_NF_CONNTRACK_EVENTS
+ int
+ nf_conntrack_eventmask_report(unsigned int eventmask,
+ 			      struct nf_conn *ct,
+@@ -211,7 +211,7 @@ EXPORT_SYMBOL_GPL(nf_conntrack_eventmask
+ 
+ /* deliver cached events and clear cache entry - must be called with locally
+  * disabled softirqs */
+-#ifdef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#ifdef CONFIG_NF_CONNTRACK_EVENTS
+ void nf_ct_deliver_cached_events(struct nf_conn *ct)
+ {
+ 	unsigned long events, missed;
+@@ -335,7 +335,7 @@ out_unlock:
+ 	rcu_read_unlock();
+ }
+ 
+-#ifdef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#ifdef CONFIG_NF_CONNTRACK_EVENTS
+ int nf_conntrack_register_notifier(struct net *net, struct notifier_block *nb)
+ {
+         return atomic_notifier_chain_register(&net->ct.nf_conntrack_chain, nb);
+@@ -364,7 +364,7 @@ out_unlock:
+ #endif
+ EXPORT_SYMBOL_GPL(nf_conntrack_register_notifier);
+ 
+-#ifdef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#ifdef CONFIG_NF_CONNTRACK_EVENTS
+ int nf_conntrack_unregister_notifier(struct net *net, struct notifier_block *nb)
+ {
+ 	return atomic_notifier_chain_unregister(&net->ct.nf_conntrack_chain, nb);
+--- a/net/netfilter/nf_conntrack_netlink.c
++++ b/net/netfilter/nf_conntrack_netlink.c
+@@ -29,7 +29,7 @@
+ #include <linux/spinlock.h>
+ #include <linux/interrupt.h>
+ 
+-#ifdef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#ifdef CONFIG_NF_CONNTRACK_EVENTS
+ #include <linux/notifier.h>
+ #endif
+ 
+@@ -626,7 +626,7 @@ static size_t ctnetlink_nlmsg_size(const
+ 	       ;
+ }
+ 
+-#ifdef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#ifdef CONFIG_NF_CONNTRACK_EVENTS
+ static int ctnetlink_conntrack_event(struct notifier_block *this,
+                            unsigned long events, void *ptr)
+ #else
+@@ -639,7 +639,7 @@ ctnetlink_conntrack_event(unsigned int e
+ 	struct nlmsghdr *nlh;
+ 	struct nfgenmsg *nfmsg;
+ 	struct nlattr *nest_parms;
+-#ifdef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#ifdef CONFIG_NF_CONNTRACK_EVENTS
+ 	struct nf_ct_event *item = (struct nf_ct_event *)ptr;
+ #endif
+ 	struct nf_conn *ct = item->ct;
+@@ -3350,7 +3350,7 @@ static int ctnetlink_stat_exp_cpu(struct
+ }
+ 
+ #ifdef CONFIG_NF_CONNTRACK_EVENTS
+-#ifdef CONFIG_NF_CONNTRACK_CHAIN_EVENTS
++#ifdef CONFIG_NF_CONNTRACK_EVENTS
+ static struct notifier_block ctnl_notifier = {
+ 	.notifier_call = ctnetlink_conntrack_event,
+ };
